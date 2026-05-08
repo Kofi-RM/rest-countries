@@ -7,7 +7,7 @@ type CountryContextType = {
 };
 
 export const CountryContext =
-  createContext<CountryContextType | undefined>(undefined);
+  createContext<CountryContextType | null>(null);
 
 export function useCountries() {
   const ctx = useContext(CountryContext);
