@@ -1,11 +1,14 @@
 
 import { useCountries } from "./CountryContext"
-
+import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 export default function CountryPage() {
 const {countries} = useCountries();
 const {name} = useParams();
 const navigate = useNavigate();
+
+const [query, setQuery] = useState("");
 const selectedCountry = countries.find(
   (c) =>
     c.name.common.toLowerCase() === name?.toLowerCase()
@@ -15,16 +18,27 @@ const currencyList = selectedCountry?.currencies
   ? Object.values(selectedCountry.currencies)
   : [];
 
+   const filteredCountries = useMemo(() => {
+      const q = query.toLowerCase().trim();
+  
+      if (!q) return countries;
+  
+      return countries.filter((c) =>
+        c.name.common.toLowerCase().includes(q)
+      );
+    }, [countries, query]);
+
+
     return(
         <>
+        <SearchBar onSearch={setQuery}/>
          <div className="min-h-screen bg-gray-100 p-6 flex gap-6">
       
       {/* LEFT: COUNTRY LIST */}
       <div className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
         <h2 className="text-xl font-bold mb-4">Countries</h2>
-            <div>nd</div>
-            <div>nd</div>
-        {countries.map((c, idx) => (
+          
+        {filteredCountries.map((c, idx) => (
           <div
             key={idx}
             onClick={() => navigate(`/country/${c.name.common.toLowerCase()}`)}
@@ -40,13 +54,13 @@ const currencyList = selectedCountry?.currencies
         
         <img
           src={selectedCountry?.flags.svg}
-        //   alt={selected.flags.alt || selected.name.common}
-          className="w-full h-60 object-cover rounded-lg"
+        alt={selectedCountry?.name.common}
+         className="w-full h-64 object-contain rounded-lg bg-gray-50"
         />
 
-        <h1 className="text-3xl font-bold mt-4">
+        <h2 className="text-3xl font-bold mt-4">
          {selectedCountry?.name.common}
-        </h1>
+        </h2>
 
         {/* <p className="text-gray-600">name</p> */}
 
