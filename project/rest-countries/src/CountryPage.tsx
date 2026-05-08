@@ -1,8 +1,10 @@
 
-import { useCountries } from "./CountryContext"
+import {  useCountries } from "./CountryContext"
 import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import AlphabetSwitcher from "./AlphabetSwitcher";
+import filterCountry from "./filterCountry";
 export default function CountryPage() {
 const {countries} = useCountries();
 const {name} = useParams();
@@ -10,7 +12,7 @@ const navigate = useNavigate();
 
 const [query, setQuery] = useState("");
  const [filter, setFilter] = useState("");
- const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+ const {sortOrder} = useCountries()
 
 const selectedCountry = countries.find(
   (c) =>
@@ -23,24 +25,7 @@ const currencyList = selectedCountry?.currencies
 
   
 const filteredCountries = useMemo(() => {
-  const q = query.toLowerCase().trim();
-
-  const result = countries.filter((c) => {
-    const matchesSearch = c.name.common.toLowerCase().includes(q);
-    const matchesRegion = filter ? c.region === filter : true;
-    return matchesSearch && matchesRegion;
-  });
-
-  return result.sort((a, b) => {
-    const nameA = a.name.common.toLowerCase();
-    const nameB = b.name.common.toLowerCase();
-
-    if (sortOrder === "asc") {
-      return nameA.localeCompare(nameB);
-    } else {
-      return nameB.localeCompare(nameA);
-    }
-  });
+  return filterCountry(countries, query, filter, sortOrder);
 }, [countries, query, filter, sortOrder]);
 
 
@@ -61,19 +46,8 @@ const filteredCountries = useMemo(() => {
     }} className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
         <div className="flex">
         <h2 className="text-xl font-bold m-4">Countries</h2>
-          
-     <button
-    onClick={() =>
-      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
-    }
-    className="ml-4 px-3 py-1 rounded shadow text-sm transition hover:scale-105"
-    style={{
-      background: "var(--bg)",
-      color: "var(--text)",
-    }}
-  >
-    {sortOrder === "asc" ? "A → Z" : "Z → A"}
-  </button>
+          <AlphabetSwitcher />
+    
 </div>
         {filteredCountries.map((c, idx) => (
           <div

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import AlphabetSwitcher from "./AlphabetSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
+
 
 type Props = {
   onSearch: (value: string) => void;
@@ -14,6 +15,8 @@ export default function SearchBar({ onSearch, onRegion }: Props) {
     const navigate = useNavigate();
     const params = useParams();
 const isEmpty = Object.keys(params).length === 0;
+
+
 
     const delay = 100;
   const [input, setInput] = useState("");
@@ -46,7 +49,7 @@ const isEmpty = Object.keys(params).length === 0;
 
   {/* LEFT: HOME BUTTON */}
   <div>
-  {!isEmpty && (
+  {!isEmpty ? (
     <button
       onClick={() => navigate("/")}
       className="flex items-center gap-2 px-4 py-2 rounded-lg shadow transition hover:scale-105"
@@ -75,7 +78,7 @@ const isEmpty = Object.keys(params).length === 0;
         Home
       </span>
     </button>
-  )}
+  ) : <AlphabetSwitcher />}
 </div>
 
 

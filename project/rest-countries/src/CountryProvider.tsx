@@ -9,7 +9,7 @@ export function CountryProvider({
 }) {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
-
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   useEffect(() => {
     async function fetchCountries() {
       const res = await fetch(
@@ -26,7 +26,7 @@ export function CountryProvider({
   }, []);
 
   return (
-    <CountryContext.Provider value={{ countries, loading }}>
+    <CountryContext.Provider value={{ countries, loading,sortOrder, setSortOrder }}>
       {children}
     </CountryContext.Provider>
   );

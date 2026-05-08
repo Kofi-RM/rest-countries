@@ -5,28 +5,18 @@ import SearchBar from "./SearchBar"
 import { useMemo, useState } from "react";
 import { useCountries } from "./CountryContext";
 import CountryPanel from "./CountryPanel";
-
+import filterCountry from "./filterCountry";
 export default function HomePage() {
 
 
  const { countries } = useCountries();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
-
+    const {sortOrder} = useCountries();
 
 const filteredCountries = useMemo(() => {
-  const q = query.toLowerCase().trim();
-
-  return countries.filter((c) => {
-    const matchesSearch =
-      c.name.common.toLowerCase().includes(q);
-
-    const matchesRegion =
-      filter ? c.region === filter : true;
-
-    return matchesSearch && matchesRegion;
-  });
-}, [countries, query, filter]);
+ return filterCountry(countries, query, filter, sortOrder);
+}, [countries, query, filter, sortOrder]);
 
     return (
         <>
