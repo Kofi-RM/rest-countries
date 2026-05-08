@@ -33,7 +33,7 @@ const prevPage = () => {
     setCurrentPage(currentPage - 1)
 }
 
-console.log(currentPage);
+
 return {
     currentPage,
     totalPages,

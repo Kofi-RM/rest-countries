@@ -14,11 +14,11 @@ export function CountryProvider({
   useEffect(() => {
     async function fetchCountries() {
       const res = await fetch(
-        "https://restcountries.com/v3.1/all?fields=name,capital,currencies,flags,region,population,landlocked,car"
+        "https://restcountries.com/v3.1/all?fields=name,capital,currencies,flags,region,population,landlocked,car,borders,cca3"
       );
 
       const data: Country[] = await res.json();
-
+      console.log(data)
       setCountries(data);
       setLoading(false);
     }

@@ -85,7 +85,7 @@ const {itemsPerPage, setItemsPerPage} = useCountries()
         color: "var(--text)",
         boxShadow: "0px 2px 8px var(--shadow)",
       }} 
-      value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
+     className="ml-4 rounded" value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
     <option value = {50}>50</option>
      <option value = {100}>100</option>
       <option value = {150}>150</option>

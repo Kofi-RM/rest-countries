@@ -13,7 +13,7 @@ export default function App() {
     setTheme((prevTheme) =>
       prevTheme === "dark" ? "light" : "dark"
     );
-    console.log(theme)
+  
   }; // toggle Theme function
 
  
