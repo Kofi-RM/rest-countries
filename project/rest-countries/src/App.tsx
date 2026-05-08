@@ -13,10 +13,12 @@ export default function App() {
     setTheme((prevTheme) =>
       prevTheme === "dark" ? "light" : "dark"
     );
+    console.log(theme)
   };
 
   // APPLY THEME TO HTML
   useEffect(() => {
+    console.log("fs")
     document.documentElement.setAttribute(
       "data-theme",
       theme

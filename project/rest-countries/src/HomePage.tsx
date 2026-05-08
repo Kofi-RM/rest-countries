@@ -1,4 +1,4 @@
-import ThemeContext from "./ThemeContext"
+
 import TaskBar from "./TaskBar"
 import SearchBar from "./SearchBar"
 
@@ -8,11 +8,6 @@ import CountryPanel from "./CountryPanel";
 
 export default function HomePage() {
 
-const [theme, setTheme] = useState("dark");
-
-const toggleTheme = () => {
-  setTheme(prevTheme => (prevTheme === "dark" ? "light" : "dark" ))
-}
 
  const { countries } = useCountries();
   const [query, setQuery] = useState("");
@@ -35,7 +30,7 @@ const filteredCountries = useMemo(() => {
 
     return (
         <>
-            <ThemeContext.Provider value = {{theme, toggleTheme}}>
+        
     <TaskBar/>
     <SearchBar onSearch={setQuery} onRegion={setFilter}/>
     <div className='flex flex-wrap justify-around'>
@@ -45,7 +40,7 @@ const filteredCountries = useMemo(() => {
         ))}
       </div>
     
-    </ThemeContext.Provider>
+    
       
         </>
     )

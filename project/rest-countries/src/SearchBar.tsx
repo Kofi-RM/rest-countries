@@ -37,10 +37,15 @@ const isEmpty = Object.keys(params).length === 0;
   setRegion(e.target.value);
 };
   return (
-    <div className="flex items-center justify-around p-2">
+    <div  className="flex items-center justify-around p-2">
       {!isEmpty ? <button
   onClick={() => navigate("/")}
-  className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow hover:bg-gray-100"
+  className="flex items-center gap-2 px-4 py-2 rounded-lg shadow transition hover:scale-105"
+  style={{
+    background: "var(--element)",
+    color: "var(--text)",
+    boxShadow: "0px 2px 8px var(--shadow)",
+  }}
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +62,17 @@ const isEmpty = Object.keys(params).length === 0;
     />
   </svg>
 
-  Home
+  <span className="font-semibold">
+    Home
+  </span>
 </button>: ""}
       
       <input
+      style={{
+      background: "var(--element)",
+      color: "var(--text)",
+      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+    }}
         onChange={changeInput}
         value={input}
         className="bg-white p-2 shadow-[0px_10px_20px_0px_rgba(0,_0,_0,_0.1)]"
@@ -68,7 +80,11 @@ const isEmpty = Object.keys(params).length === 0;
         type="text"
       />
 
-      <select value = {region} onChange={handleRegionChange}className="bg-white p-3">
+      <select style={{
+      background: "var(--element)",
+      color: "var(--text)",
+      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+    }} value = {region} onChange={handleRegionChange}className="bg-white p-3">
         <option>Filter by Region</option>
         <option value="Africa">Africa</option>
         <option value="Americas">Americas</option>

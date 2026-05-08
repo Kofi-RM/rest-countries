@@ -13,15 +13,50 @@ export default function CountryPanel(prop:CountryProp) {
     const country = prop.country;
     return (
         <>
-        <div onClick={() => seeCountryDetails(country.name.common)}key = {prop.country.name.common}className = "transition hover:scale-105 cursor-pointer bg-white rounded-lg shadow-[0px_10px_20px_0px_rgba(0,_0,_0,_0.1)] m-4 flex flex-col w-60">
-        <img src = {country.flags.svg}></img>
-        <div className="m-2 ">
-            <h2>{prop.country.name.common}</h2>
-            <p className="m-2"><span className="font-medium black">Population: </span> {country.population.toLocaleString()}</p>
-             <p className="m-2"><span className="font-medium black">Region: </span> {country.region} </p>
-              <p className="m-2"><span className="font-medium black">Capital: </span> {country.capital} </p>
-        </div>
-        </div>
-        </>
+  <div
+    onClick={() =>
+      seeCountryDetails(country.name.common)
+    }
+    key={country.name.common}
+    className="transition hover:scale-105 cursor-pointer rounded-lg m-4 flex flex-col w-60 overflow-hidden"
+    style={{
+      background: "var(--element)",
+      color: "var(--text)",
+      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+    }}
+  >
+    <img
+      src={country.flags.svg}
+      className="w-full h-36 object-cover"
+    />
+
+    <div className="p-4">
+      <h2 className="font-extrabold text-lg mb-4">
+        {country.name.common}
+      </h2>
+
+      <p className="mb-2">
+        <span className="font-semibold">
+          Population:
+        </span>{" "}
+        {country.population.toLocaleString()}
+      </p>
+
+      <p className="mb-2">
+        <span className="font-semibold">
+          Region:
+        </span>{" "}
+        {country.region}
+      </p>
+
+      <p>
+        <span className="font-semibold">
+          Capital:
+        </span>{" "}
+        {country.capital?.[0] ?? "N/A"}
+      </p>
+    </div>
+  </div>
+</>
     )
 }

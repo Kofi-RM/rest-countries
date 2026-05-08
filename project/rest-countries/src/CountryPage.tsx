@@ -39,25 +39,44 @@ const filteredCountries = useMemo(() => {
     return(
         <>
         <SearchBar onRegion={setFilter} onSearch={setQuery}/>
-         <div className="min-h-screen bg-gray-100 p-6 flex gap-6">
+         <div style={{
+      background: "var(--element)",
+      color: "var(--text)",
+      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+    }}className="min-h-screen bg-gray-100 p-6 flex gap-6">
       
       {/* LEFT: COUNTRY LIST */}
-      <div className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
+      <div style={{
+      background: "var(--element)",
+      color: "var(--text)",
+      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+    }} className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
         <h2 className="text-xl font-bold m-4">Countries</h2>
           
         {filteredCountries.map((c, idx) => (
           <div
             key={idx}
             onClick={() => navigate(`/country/${c.name.common.toLowerCase()}`)}
-            className="p-2 cursor-pointer hover:bg-gray-100 rounded"
+            className="p-2 cursor-pointer hover:bg-gray-700 rounded"
           >
+            <div className="flex">
             {c.name.common}
+           <img
+    src={c.flags.svg}
+    alt={`${c.name.common} flag`}
+    className="ml-2 w-8 h-5 object-contain rounded-sm shadow-sm"
+  />
+          </div>
           </div>
         ))}
       </div>
 
       {/* RIGHT: COUNTRY DETAILS */}
-      <div className="flex-1 bg-white p-6 rounded-xl shadow">
+      <div style={{
+      background: "var(--element)",
+      color: "var(--text)",
+      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+    }} className="flex-1 bg-white p-6 rounded-xl shadow">
         
         <img
           src={selectedCountry?.flags.svg}
