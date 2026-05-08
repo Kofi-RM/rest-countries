@@ -32,7 +32,7 @@ export default function App() {
       <div
         className="min-h-screen transition-colors duration-300"
         style={{
-          background: "var(--bg)",
+          backgroundColor: "var(--bg)",
           color: "var(--text)",
         }}
       >

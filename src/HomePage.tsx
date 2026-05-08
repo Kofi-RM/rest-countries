@@ -43,7 +43,7 @@ return (
   <div
   className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-2xl backdrop-blur-md shadow-xl"
   style={{
-    background: "var(--element)",
+    backgroundColor: "var(--element)",
     color: "var(--text)",
     boxShadow: "0px 8px 30px rgba(0,0,0,0.2)",
   }}
@@ -53,7 +53,7 @@ return (
     disabled={!pageValues.canPrevPage}
     className="px-4 py-2 rounded-lg transition hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
     style={{
-      background: "var(--bg)",
+      backgroundColor: "var(--bg)",
       color: "var(--text)",
     }}
   >
@@ -70,7 +70,7 @@ return (
     disabled={!pageValues.canNextPage}
     className="px-4 py-2 rounded-lg transition hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
     style={{
-      background: "var(--bg)",
+      backgroundColor: "var(--bg)",
       color: "var(--text)",
     }}
   >

@@ -38,14 +38,14 @@ const filteredCountries = useMemo(() => {
         <>
         <SearchBar onRegion={setFilter} onSearch={setQuery}/>
          <div style={{
-      background: "var(--element)",
+      backgroundColor: "var(--element)",
       color: "var(--text)",
       boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
     }}className="min-h-screen bg-gray-100 p-6 flex gap-6">
       
       {/* LEFT: COUNTRY LIST */}
       <div style={{
-      background: "var(--element)",
+      backgroundColor: "var(--element)",
       color: "var(--text)",
       boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
     }} className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
@@ -75,7 +75,7 @@ const filteredCountries = useMemo(() => {
     <div
   className="flex-1 p-6 rounded-xl space-y-6"
   style={{
-    background: "var(--element)",
+    backgroundColor: "var(--element)",
     color: "var(--text)",
     boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
   }}
@@ -146,7 +146,7 @@ const filteredCountries = useMemo(() => {
           }
           className="px-4 py-2 rounded-md text-sm transition hover:scale-105"
           style={{
-            background: "var(--bg)",
+            backgroundColor: "var(--bg)",
             color: "var(--text)",
             boxShadow:
               "0px 2px 8px rgba(0,0,0,0.1)",

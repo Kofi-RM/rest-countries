@@ -20,7 +20,7 @@ export default function CountryPanel(prop:CountryProp) {
     key={country.name.common}
     className="transition hover:scale-105 cursor-pointer rounded-lg m-4 flex flex-col w-60 overflow-hidden"
     style={{
-      background: "var(--element)",
+      backgroundColor: "var(--element)",
       color: "var(--text)",
       boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
     }}
