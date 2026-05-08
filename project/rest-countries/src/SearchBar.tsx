@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+import ThemeSwitcher from "./ThemeSwitcher";
+
 type Props = {
   onSearch: (value: string) => void;
   onRegion: (value:string) => void;
@@ -25,6 +28,7 @@ const isEmpty = Object.keys(params).length === 0;
     delay,
   });
 
+  
   // ⚡ send debounced value upward
   useEffect(() => {
     onSearch(debouncedInput);
@@ -37,61 +41,84 @@ const isEmpty = Object.keys(params).length === 0;
   setRegion(e.target.value);
 };
   return (
-    <div  className="flex items-center justify-around p-2">
-      {!isEmpty ? <button
-  onClick={() => navigate("/")}
-  className="flex items-center gap-2 px-4 py-2 rounded-lg shadow transition hover:scale-105"
-  style={{
-    background: "var(--element)",
-    color: "var(--text)",
-    boxShadow: "0px 2px 8px var(--shadow)",
-  }}
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="currentColor"
-    className="w-5 h-5"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M3 10.5L12 3l9 7.5M5.25 9.75V21h13.5V9.75"
-    />
-  </svg>
+    
+    <div  className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4">
 
-  <span className="font-semibold">
-    Home
-  </span>
-</button>: ""}
-      
-      <input
+  {/* LEFT: HOME BUTTON */}
+  <div>
+  {!isEmpty && (
+    <button
+      onClick={() => navigate("/")}
+      className="flex items-center gap-2 px-4 py-2 rounded-lg shadow transition hover:scale-105"
       style={{
-      background: "var(--element)",
-      color: "var(--text)",
-      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
-    }}
-        onChange={changeInput}
-        value={input}
-        className="bg-white p-2 shadow-[0px_10px_20px_0px_rgba(0,_0,_0,_0.1)]"
-        placeholder="Type a country"
-        type="text"
-      />
+        background: "var(--element)",
+        color: "var(--text)",
+        boxShadow: "0px 2px 8px var(--shadow)",
+      }}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2}
+        stroke="currentColor"
+        className="w-5 h-5"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 10.5L12 3l9 7.5M5.25 9.75V21h13.5V9.75"
+        />
+      </svg>
 
-      <select style={{
-      background: "var(--element)",
-      color: "var(--text)",
-      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
-    }} value = {region} onChange={handleRegionChange}className="bg-white p-3">
-        <option>Filter by Region</option>
-        <option value="Africa">Africa</option>
-        <option value="Americas">Americas</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europe</option>
-        <option value="Oceania">Oceania</option>
-      </select>
-    </div>
+      <span className="font-semibold">
+        Home
+      </span>
+    </button>
+  )}
+</div>
+
+
+  <div className="flex gap-4 items-center">
+
+    <input
+      value={input}
+      onChange={changeInput}
+      placeholder="Search for a country..."
+      type="text"
+      className="w-full md:w-96 px-5 py-3 rounded-md outline-none"
+      style={{
+        background: "var(--element)",
+        color: "var(--text)",
+        boxShadow: "0px 4px 12px rgba(0,0,0,0.08)",
+      }}
+    />
+
+  
+    <select
+      value={region}
+      onChange={handleRegionChange}
+      className="w-full md:w-52 px-4 py-3 rounded-md outline-none cursor-pointer"
+      style={{
+        background: "var(--element)",
+        color: "var(--text)",
+        boxShadow: "0px 4px 12px rgba(0,0,0,0.08)",
+      }}
+    >
+      <option value="">Filter by Region</option>
+      <option value="Africa">Africa</option>
+      <option value="Americas">Americas</option>
+      <option value="Asia">Asia</option>
+      <option value="Europe">Europe</option>
+      <option value="Oceania">Oceania</option>
+    </select>
+
+{!isEmpty && (
+<ThemeSwitcher/>
+  )}
+
+  </div>
+</div>
+
   );
 }

@@ -1,12 +1,12 @@
-import { useContext } from "react";
-import ThemeContext from "./ThemeContext";
+
+import ThemeSwitcher from "./ThemeSwitcher";
 
 
 
 
 export default function TaskBar() {
 
-    const { theme, toggleTheme } = useContext(ThemeContext); // Consume the context
+
     return (
         <>
         <div  style={{
@@ -18,7 +18,7 @@ export default function TaskBar() {
 
 
         <h2>Where in the world?</h2>
-        <button onClick={toggleTheme}>{theme === "light" ? "Dark Mode": "Light Mode"}</button>
+        <ThemeSwitcher/>
         </div>      
         </>
     )

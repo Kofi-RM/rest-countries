@@ -10,6 +10,7 @@ const navigate = useNavigate();
 
 const [query, setQuery] = useState("");
  const [filter, setFilter] = useState("");
+ const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
 const selectedCountry = countries.find(
   (c) =>
@@ -24,16 +25,23 @@ const currencyList = selectedCountry?.currencies
 const filteredCountries = useMemo(() => {
   const q = query.toLowerCase().trim();
 
-  return countries.filter((c) => {
-    const matchesSearch =
-      c.name.common.toLowerCase().includes(q);
-
-    const matchesRegion =
-      filter ? c.region === filter : true;
-
+  const result = countries.filter((c) => {
+    const matchesSearch = c.name.common.toLowerCase().includes(q);
+    const matchesRegion = filter ? c.region === filter : true;
     return matchesSearch && matchesRegion;
   });
-}, [countries, query, filter]);
+
+  return result.sort((a, b) => {
+    const nameA = a.name.common.toLowerCase();
+    const nameB = b.name.common.toLowerCase();
+
+    if (sortOrder === "asc") {
+      return nameA.localeCompare(nameB);
+    } else {
+      return nameB.localeCompare(nameA);
+    }
+  });
+}, [countries, query, filter, sortOrder]);
 
 
     return(
@@ -51,8 +59,22 @@ const filteredCountries = useMemo(() => {
       color: "var(--text)",
       boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
     }} className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
+        <div className="flex">
         <h2 className="text-xl font-bold m-4">Countries</h2>
           
+     <button
+    onClick={() =>
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
+    }
+    className="ml-4 px-3 py-1 rounded shadow text-sm transition hover:scale-105"
+    style={{
+      background: "var(--bg)",
+      color: "var(--text)",
+    }}
+  >
+    {sortOrder === "asc" ? "A → Z" : "Z → A"}
+  </button>
+</div>
         {filteredCountries.map((c, idx) => (
           <div
             key={idx}
@@ -71,60 +93,64 @@ const filteredCountries = useMemo(() => {
         ))}
       </div>
 
-      {/* RIGHT: COUNTRY DETAILS */}
-      <div style={{
-      background: "var(--element)",
-      color: "var(--text)",
-      boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
-    }} className="flex-1 bg-white p-6 rounded-xl shadow">
-        
-        <img
-          src={selectedCountry?.flags.svg}
-        alt={selectedCountry?.name.common}
-         className="w-full h-64 object-contain rounded-lg bg-gray-50 mb-4"
-        />
+    <div
+  className="flex-1 p-6 rounded-xl space-y-6"
+  style={{
+    background: "var(--element)",
+    color: "var(--text)",
+    boxShadow: "0px 10px 20px rgba(0,0,0,0.1)",
+  }}
+>
 
-        <h2 className="text-3xl font-bold m-4">
-         {selectedCountry?.name.common}
-        </h2>
+  {/* FLAG */}
+ <div className="w-full h-96 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
+  <img
+    src={selectedCountry?.flags.svg}
+    alt={selectedCountry?.name.common}
+    className="max-h-full max-w-full object-contain"
+  />
+</div>
 
-        {/* <p className="text-gray-600">name</p> */}
+  {/* TITLE */}
+  <h2 className="text-2xl font-bold">
+    {selectedCountry?.name.common}
+  </h2>
 
-        <div className="mt-6 space-y-3 text-gray-700">
+  {/* INFO GRID */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
 
-          <p>
-            <strong>Capital: </strong>{selectedCountry?.capital}
-      
-          </p>
+    <p>
+      <strong>Capital:</strong> {selectedCountry?.capital}
+    </p>
 
-          <p>
-            <strong>Region: </strong>{selectedCountry?.region}
-          </p>
+    <p>
+      <strong>Region:</strong> {selectedCountry?.region}
+    </p>
 
-          <p>
-            <strong>Population: </strong>{selectedCountry?.population.toLocaleString()}
-           
-          </p>
+    <p>
+      <strong>Population:</strong>{" "}
+      {selectedCountry?.population?.toLocaleString()}
+    </p>
 
-          <p>
-            <strong>Landlocked: </strong>{selectedCountry?.landlocked}
-           
-          </p>
+    <p>
+      <strong>Landlocked:</strong>{" "}
+      {selectedCountry?.landlocked ? "Yes" : "No"}
+    </p>
 
-          <p>
-            <strong>Car side: </strong> {selectedCountry?.car.side}
-          </p>
+    <p>
+      <strong>Car side:</strong> {selectedCountry?.car?.side}
+    </p>
 
-          <p>
-            <strong>Currency: </strong>
-            {currencyList.length
-  ? currencyList.map((c) => c.name).join(", ")
-  : "N/A"}
+    <p>
+      <strong>Currency:</strong>{" "}
+      {currencyList.length
+        ? currencyList.map((c) => c.name).join(", ")
+        : "N/A"}
+    </p>
 
-          </p>
+  </div>
 
-        </div>
-      </div>
+</div>
     </div>
         </>
     )
