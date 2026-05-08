@@ -7,28 +7,28 @@ import HomePage from "./HomePage";
 import CountryPage from "./CountryPage";
 
 export default function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("dark"); // default theme is dark
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
       prevTheme === "dark" ? "light" : "dark"
     );
     console.log(theme)
-  };
+  }; // toggle Theme function
 
-  // APPLY THEME TO HTML
+ 
   useEffect(() => {
-    console.log("fs")
+   
     document.documentElement.setAttribute(
       "data-theme",
       theme
     );
-  }, [theme]);
+  }, [theme]); // Change theme in document root every time theme is toggle
 
   return (
     <ThemeContext.Provider
-      value={{ theme, toggleTheme }}
-    >
+      value={{ theme, toggleTheme }}>
+{/* Wrap ThemeContext to all components */}
       <div
         className="min-h-screen transition-colors duration-300"
         style={{
@@ -42,6 +42,7 @@ export default function App() {
           <Route
             path="/country/:name"
             element={<CountryPage />}
+            // Define routes
           />
         </Routes>
       </div>

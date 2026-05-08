@@ -17,7 +17,7 @@ export default function TaskBar() {
       
 
 
-        <h2>Where in the world?</h2>
+        <h2>Where in the World?</h2>
         <ThemeSwitcher/>
         </div>      
         </>

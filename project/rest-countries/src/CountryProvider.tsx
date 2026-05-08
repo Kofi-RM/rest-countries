@@ -10,6 +10,7 @@ export function CountryProvider({
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState(true);
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+    const [itemsPerPage, setItemsPerPage] = useState(100);
   useEffect(() => {
     async function fetchCountries() {
       const res = await fetch(
@@ -23,10 +24,10 @@ export function CountryProvider({
     }
 
     fetchCountries();
-  }, []);
+  }, []); // on inital mount gets all country information
 
   return (
-    <CountryContext.Provider value={{ countries, loading,sortOrder, setSortOrder }}>
+    <CountryContext.Provider value={{ countries, loading,sortOrder, setSortOrder, itemsPerPage,setItemsPerPage }}>
       {children}
     </CountryContext.Provider>
   );

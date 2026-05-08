@@ -6,15 +6,15 @@ export default function filterCountry(
   countries: Country[],
   query: string,
   filter: string,
-  sortOrder: SortOrder
-) {
+  sortOrder: SortOrder) {
+
   const q = query.toLowerCase().trim();
 
   const result = countries.filter((c) => {
     const matchesSearch = c.name.common.toLowerCase().includes(q);
     const matchesRegion = filter ? c.region === filter : true;
     return matchesSearch && matchesRegion;
-  });
+  }); // filter
 
   return result.sort((a, b) => {
     const nameA = a.name.common.toLowerCase();
@@ -22,6 +22,6 @@ export default function filterCountry(
 
     return sortOrder === "asc"
       ? nameA.localeCompare(nameB)
-      : nameB.localeCompare(nameA);
+      : nameB.localeCompare(nameA); // sort
   });
 }

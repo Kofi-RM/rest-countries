@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AlphabetSwitcher from "./AlphabetSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
-
+import { useCountries } from "./CountryContext";
 
 type Props = {
   onSearch: (value: string) => void;
@@ -16,7 +16,7 @@ export default function SearchBar({ onSearch, onRegion }: Props) {
     const params = useParams();
 const isEmpty = Object.keys(params).length === 0;
 
-
+const {itemsPerPage, setItemsPerPage} = useCountries()
 
     const delay = 100;
   const [input, setInput] = useState("");
@@ -48,7 +48,7 @@ const isEmpty = Object.keys(params).length === 0;
     <div  className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4">
 
   {/* LEFT: HOME BUTTON */}
-  <div>
+  <div className="flex">
   {!isEmpty ? (
     <button
       onClick={() => navigate("/")}
@@ -79,6 +79,19 @@ const isEmpty = Object.keys(params).length === 0;
       </span>
     </button>
   ) : <AlphabetSwitcher />}
+
+  {isEmpty ? <select style={{
+        background: "var(--element)",
+        color: "var(--text)",
+        boxShadow: "0px 2px 8px var(--shadow)",
+      }} 
+      value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
+    <option value = {50}>50</option>
+     <option value = {100}>100</option>
+      <option value = {150}>150</option>
+       <option value = {250}>250</option>
+    </select> : ""
+  }
 </div>
 
 
