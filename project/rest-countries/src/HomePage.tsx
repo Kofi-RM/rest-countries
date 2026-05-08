@@ -36,7 +36,7 @@ const toggleTheme = () => {
     <div className='flex flex-wrap justify-around'>
     {/* <div className="grid grid-cols-3 gap-4 p-4"></div> */}
        {filteredCountries.map((c) => (
-        <CountryPanel country={c}/>
+        <CountryPanel key = {c.name.common}country={c}/>
         ))}
       </div>
     

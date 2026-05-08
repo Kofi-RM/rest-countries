@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function SearchBar({ onSearch }: Props) {
-  const delay = 600;
+  const delay = 100;
   const [input, setInput] = useState("");
 
   const changeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
