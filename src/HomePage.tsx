@@ -40,33 +40,43 @@ return (
         ))}
         <div className="flex items-center justify-center gap-4 mt-6">
 
+  <div
+  className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-6 py-3 rounded-2xl backdrop-blur-md shadow-xl"
+  style={{
+    background: "var(--element)",
+    color: "var(--text)",
+    boxShadow: "0px 8px 30px rgba(0,0,0,0.2)",
+  }}
+>
   <button
     onClick={pageValues.prevPage}
     disabled={!pageValues.canPrevPage}
-    className="px-4 py-2 rounded shadow disabled:opacity-50"
+    className="px-4 py-2 rounded-lg transition hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
     style={{
-      background: "var(--element)",
+      background: "var(--bg)",
       color: "var(--text)",
     }}
   >
-    Prev
+    ← Prev
   </button>
 
-  <p>
-    Page {pageValues.currentPage} of {pageValues.totalPages}
+  <p className="font-medium whitespace-nowrap">
+    Page {pageValues.currentPage} of{" "}
+    {pageValues.totalPages}
   </p>
 
   <button
     onClick={pageValues.nextPage}
     disabled={!pageValues.canNextPage}
-    className="px-4 py-2 rounded shadow disabled:opacity-50"
+    className="px-4 py-2 rounded-lg transition hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
     style={{
-      background: "var(--element)",
+      background: "var(--bg)",
       color: "var(--text)",
     }}
   >
-    Next
+    Next →
   </button>
+</div>
 
 </div>
       </div>
