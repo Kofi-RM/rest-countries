@@ -7,7 +7,7 @@ type DebounceProps = {
 
 export default function useDebounce({ input, delay }: DebounceProps) {
     const [debounceValue, setDebounceValue] = useState(input)
-    const isLoading = input !== debounceValue;
+    // const isLoading = input !== debounceValue;
     useEffect(() => {
        
         const timer = setTimeout(() => {
@@ -23,7 +23,7 @@ export default function useDebounce({ input, delay }: DebounceProps) {
         
     
     console.log(debounceValue)
-    return {debounceValue,
-        isLoading
-    }
+    return debounceValue
+     
+    
 }
