@@ -2,11 +2,19 @@ import { useState } from 'react'
 import ThemeContext from './theme-context'
 import './App.css'
 import TaskBar from './TaskBar';
+import SearchBar from './SearchBar';
 function App() {
 const [theme, setTheme] = useState("dark");
 
 const toggleTheme = () => {
   setTheme(prevTheme => (prevTheme === "dark" ? "light" : "dark" ))
+}
+
+async function getCountryByName(name:string):Promise<Response> {
+  const result = await fetch(`https://restcountries.com/v3.1/name/${name}`)
+  const json = await result.json()
+
+  return json
 }
 
 async function allCountries():Promise<Response> {
@@ -15,12 +23,18 @@ async function allCountries():Promise<Response> {
   console.log(json)
   return json;
 }
-const data = allCountries()
+allCountries().then((data) => {
+  console.log(data);
+
+  // const stringified = JSON.stringify(data);
+
+  // console.log(stringified);
+});
   return (
     <>
     <ThemeContext.Provider value = {{theme, toggleTheme}}>
     <TaskBar/>
-
+    <SearchBar/>
     </ThemeContext.Provider>
       
     </>

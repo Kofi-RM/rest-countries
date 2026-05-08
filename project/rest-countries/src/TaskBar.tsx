@@ -4,10 +4,10 @@ export default function TaskBar() {
 const { theme, toggleTheme } = useContext(ThemeContext); // Consume the context
     return (
         <>
-        
+        <div className="flex justify-around">
         <h2>Where in the world?</h2>
         <button onClick={toggleTheme}>{theme === "light" ? "Dark Mode": "Light Mode"}</button>
-      
+        </div>      
         </>
     )
 }
