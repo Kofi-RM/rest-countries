@@ -17,9 +17,9 @@ export default function CountryPanel(prop:CountryProp) {
         <img src = {country.flags.svg}></img>
         <div className="m-2 ">
             <h2>{prop.country.name.common}</h2>
-            <p className="m-2"><span className="font-medium">Population: </span> {country.population}</p>
-             <p className="m-2"><span className="font-medium">Region: </span> {country.region} </p>
-              <p className="m-2"><span className="font-medium">Capital: </span> {country.capital} </p>
+            <p className="m-2"><span className="font-medium black">Population: </span> {country.population.toLocaleString()}</p>
+             <p className="m-2"><span className="font-medium black">Region: </span> {country.region} </p>
+              <p className="m-2"><span className="font-medium black">Capital: </span> {country.capital} </p>
         </div>
         </div>
         </>

@@ -1,4 +1,4 @@
-import ThemeContext from "./theme-context"
+import ThemeContext from "./ThemeContext"
 import TaskBar from "./TaskBar"
 import SearchBar from "./SearchBar"
 

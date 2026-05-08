@@ -99,7 +99,9 @@ h2 {
 p {
   margin: 0;
 }
-
+.black {
+  color:black
+}
 code,
 .counter {
   font-family: var(--mono);

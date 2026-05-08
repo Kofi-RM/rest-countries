@@ -83,7 +83,7 @@ const filteredCountries = useMemo(() => {
           </p>
 
           <p>
-            <strong>Population: </strong>{selectedCountry?.population}
+            <strong>Population: </strong>{selectedCountry?.population.toLocaleString()}
            
           </p>
 
