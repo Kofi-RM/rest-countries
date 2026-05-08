@@ -16,23 +16,28 @@ const toggleTheme = () => {
 
  const { countries } = useCountries();
   const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("");
 
-  // ⚡ MEMOIZED SEARCH (NO LAG)
-  const filteredCountries = useMemo(() => {
-    const q = query.toLowerCase().trim();
 
-    if (!q) return countries;
+const filteredCountries = useMemo(() => {
+  const q = query.toLowerCase().trim();
 
-    return countries.filter((c) =>
-      c.name.common.toLowerCase().includes(q)
-    );
-  }, [countries, query]);
+  return countries.filter((c) => {
+    const matchesSearch =
+      c.name.common.toLowerCase().includes(q);
+
+    const matchesRegion =
+      filter ? c.region === filter : true;
+
+    return matchesSearch && matchesRegion;
+  });
+}, [countries, query, filter]);
 
     return (
         <>
             <ThemeContext.Provider value = {{theme, toggleTheme}}>
     <TaskBar/>
-    <SearchBar onSearch={setQuery}/>
+    <SearchBar onSearch={setQuery} onRegion={setFilter}/>
     <div className='flex flex-wrap justify-around'>
     {/* <div className="grid grid-cols-3 gap-4 p-4"></div> */}
        {filteredCountries.map((c) => (

@@ -9,6 +9,8 @@ const {name} = useParams();
 const navigate = useNavigate();
 
 const [query, setQuery] = useState("");
+ const [filter, setFilter] = useState("");
+
 const selectedCountry = countries.find(
   (c) =>
     c.name.common.toLowerCase() === name?.toLowerCase()
@@ -18,25 +20,30 @@ const currencyList = selectedCountry?.currencies
   ? Object.values(selectedCountry.currencies)
   : [];
 
-   const filteredCountries = useMemo(() => {
-      const q = query.toLowerCase().trim();
   
-      if (!q) return countries;
-  
-      return countries.filter((c) =>
-        c.name.common.toLowerCase().includes(q)
-      );
-    }, [countries, query]);
+const filteredCountries = useMemo(() => {
+  const q = query.toLowerCase().trim();
+
+  return countries.filter((c) => {
+    const matchesSearch =
+      c.name.common.toLowerCase().includes(q);
+
+    const matchesRegion =
+      filter ? c.region === filter : true;
+
+    return matchesSearch && matchesRegion;
+  });
+}, [countries, query, filter]);
 
 
     return(
         <>
-        <SearchBar onSearch={setQuery}/>
+        <SearchBar onRegion={setFilter} onSearch={setQuery}/>
          <div className="min-h-screen bg-gray-100 p-6 flex gap-6">
       
       {/* LEFT: COUNTRY LIST */}
       <div className="w-1/3 bg-white p-4 rounded-xl shadow overflow-y-auto max-h-screen">
-        <h2 className="text-xl font-bold mb-4">Countries</h2>
+        <h2 className="text-xl font-bold m-4">Countries</h2>
           
         {filteredCountries.map((c, idx) => (
           <div
@@ -55,10 +62,10 @@ const currencyList = selectedCountry?.currencies
         <img
           src={selectedCountry?.flags.svg}
         alt={selectedCountry?.name.common}
-         className="w-full h-64 object-contain rounded-lg bg-gray-50"
+         className="w-full h-64 object-contain rounded-lg bg-gray-50 mb-4"
         />
 
-        <h2 className="text-3xl font-bold mt-4">
+        <h2 className="text-3xl font-bold m-4">
          {selectedCountry?.name.common}
         </h2>
 

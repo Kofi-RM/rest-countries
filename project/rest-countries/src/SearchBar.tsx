@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 type Props = {
   onSearch: (value: string) => void;
+  onRegion: (value:string) => void;
 };
 
-export default function SearchBar({ onSearch }: Props) {
+export default function SearchBar({ onSearch, onRegion }: Props) {
     const navigate = useNavigate();
     const params = useParams();
 const isEmpty = Object.keys(params).length === 0;
@@ -29,6 +30,9 @@ const isEmpty = Object.keys(params).length === 0;
     onSearch(debouncedInput);
   }, [debouncedInput, onSearch]);
 
+  useEffect(() => {
+    onRegion(region)
+  },[region, onRegion])
   const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
   setRegion(e.target.value);
 };
