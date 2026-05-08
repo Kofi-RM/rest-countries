@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@import "tailwindcss";
+
+/* LIGHT MODE */
+[data-theme="light"] {
+  --bg: #fafafa;
+  --element: #ffffff;
+  --text: #111517;
+  --input: #858585;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* DARK MODE */
+[data-theme="dark"] {
+  --bg: #202c37;
+  --element: #2b3945;
+  --text: #ffffff;
+  --input: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Nunito Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+* {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+ 
+}
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 36px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+button:hover svg {
+  filter: drop-shadow(0 0 2px var(--text));
+}
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+.taskbar {
+  background-color: white;
+}
